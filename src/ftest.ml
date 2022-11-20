@@ -1,6 +1,8 @@
 open Gfile
 open Tools
 
+let function_to_test = fun x -> x
+
 let () =
 
   (* Check the number of command-line arguments *)
@@ -24,8 +26,11 @@ let () =
   (* Open file *)
   let graph = from_file infile in
 
+  (* Apply function_to_test to the graph *)
+  let output_graph = function_to_test graph in
+
   (* Rewrite the graph that has been read. *)
-  let () = write_file outfile graph in
+  let () = write_file outfile output_graph in
 
   ()
 
