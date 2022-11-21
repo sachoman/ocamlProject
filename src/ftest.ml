@@ -1,8 +1,6 @@
 open Gfile
 open Tools
 
-let function_to_test = fun x -> x
-
 let () =
 
   (* Check the number of command-line arguments *)
@@ -26,9 +24,18 @@ let () =
   (* Open file *)
   let graph = from_file infile in
 
-  (* Apply function_to_test to the graph *)
-  let output_graph = function_to_test graph in
+  (* Tests des fonctions *)
 
+  (* Test clone_nodes *)
+  (* let output_graph = clone_nodes graphin *)
+
+  (* Test gmap *)
+  (* let output_graph = gmap graph (fun x-> string_of_int (2*int_of_string x)) in *)
+
+  (* Test add_arc *)
+  (* let output_graph = gmap (add_arc (gmap graph int_of_string) 2 5 98) string_of_int in *)
+
+  let output_graph = graph in
   (* Rewrite the graph that has been read. *)
   (* let () = write_file outfile output_graph in *)
   let () = export outfile output_graph in
