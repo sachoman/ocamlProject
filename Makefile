@@ -18,3 +18,13 @@ demo: build
 clean:
 	-rm -rf _build/
 	-rm ftest.native
+	-rm outfile
+	-rm outfile.png
+
+view:
+	@echo "\n==== EXPORTING ====\n"
+	./ftest.native graphs/graph1 1 2 outfile
+	@echo "\n==== CONVERTING ====\n"
+	dot -Tpng outfile > outfile.png
+	@echo "\n==== PRINTING ====\n"
+	eom outfile.png

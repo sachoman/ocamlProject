@@ -30,7 +30,8 @@ let () =
   let output_graph = function_to_test graph in
 
   (* Rewrite the graph that has been read. *)
-  let () = write_file outfile output_graph in
+  (* let () = write_file outfile output_graph in *)
+  let () = export outfile output_graph in
 
   ()
 

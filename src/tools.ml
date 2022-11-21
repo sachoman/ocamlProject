@@ -1,7 +1,7 @@
 open Graph
 
 (* clone_nodes gr returns a new graph having the same nodes than gr, but no arc *)
-let clone_nodes gr = n_fold gr (fun g i -> new_node g i) empty_graph
+let clone_nodes gr = n_fold gr new_node empty_graph
 
 (* gmap gr f maps all arcs of gr by function f *)
 let gmap gr f = let new_gr = clone_nodes gr in
