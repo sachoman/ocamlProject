@@ -8,3 +8,6 @@ let bfs g s t=
 
 let ford_fulkerson g s t = 
   assert false
+
+let make_residual_graph actual_res_gr path =
+  assert false
