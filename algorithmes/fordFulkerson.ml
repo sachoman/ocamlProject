@@ -10,7 +10,8 @@ let bfs g s t=
   let queue = Stack.create in
   (
     pred.(s) <- -1;
-  assert False
+    Stack.push s queue
+    assert False
   )
 
 
