@@ -16,3 +16,8 @@ let add_arc gr id1 id2 lbl =
     match (find_arc gr id1 id2) with
     | None -> new_arc gr id1 id2 lbl
     | Some l -> new_arc gr id1 id2 (l + lbl)
+
+let nbr_nobes gr = 
+  let x = ref 0 in
+  n_iter gr (fun i -> x:=x+1)
+  in !x
