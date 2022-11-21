@@ -17,7 +17,4 @@ let add_arc gr id1 id2 lbl =
     | None -> new_arc gr id1 id2 lbl
     | Some l -> new_arc gr id1 id2 (l + lbl)
 
-let nbr_nobes gr = 
-  let x = ref 0 in
-  n_iter gr (fun i -> x:=x+1)
-  in !x
+let nb_nodes gr = n_fold gr (fun nb _ -> nb+1) 0
