@@ -8,4 +8,4 @@ val edmond_karp: int  graph -> int -> int
 val ford_fulkerson: int graph -> int  -> int
 
 (* Creates the residual graph from the  *)
-val make_residual_graph: int graph -> int graph
+val make_residual_graph: int graph -> int graph -> int list -> int graph

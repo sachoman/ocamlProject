@@ -33,6 +33,15 @@ let ford_fulkerson g s t =
   *)
   assert false
 
-
-let make_residual_graph actual_res_gr path =
-  assert false
+let make_residual_graph actual_res_gr flow_graph path =
+  let rec find_min_of_path p m = match p with
+    | [] -> m
+    | [_] -> raise Graph_error "Pb"
+    | id1::id2 -> match (find_arc id1 id2) with
+      | Some v -> min v m
+      | None -> raise Graph_error "No edge"
+      | id1::id2::q -> match (find_arc id1 id2) with
+        | Some v -> min v (find_min_of_path id2::q m)
+        | None -> raise Graph_error "No edge"
+  in find_min_of_path path max_int in
+assert false
