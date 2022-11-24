@@ -7,26 +7,26 @@ let edmond_karp gr = assert false
 
 let find_path gres s t = 
   let rec aux gres a c deja_vu path= 
-  if (a==c) then ([],path, true)
-  else
-    let larc = out_arcs gres a in
-    match larc with 
-    [] -> ([], [], false)
-    |(b,label)::q when (not (List.mem a deja_vu)) -> 
-      let res = aux gres b c (b::deja_vu) ((b,label)::path) in
-      (
-        match res with
-        (res_deja_vu, _ , false) -> aux gres a c (res_deja_vu@deja_vu) path
-        |(_,path, true ) -> ([],path, true)
-      )
-    |(b,_)::q -> aux gres a c (b::deja_vu) path
-    in let res = aux gres s t [s] [] in
-    match res with
+    if (a==c) then ([],path, true)
+    else
+      let larc = out_arcs gres a in
+      match larc with 
+        [] -> ([], [], false)
+      |(b,label)::q when (not (List.mem a deja_vu)) -> 
+        let res = aux gres b c (b::deja_vu) ((b,label)::path) in
+        (
+          match res with
+            (res_deja_vu, _ , false) -> aux gres a c (res_deja_vu@deja_vu) path
+          |(_,path, true ) -> ([],path, true)
+        )
+      |(b,_)::q -> aux gres a c (b::deja_vu) path
+  in let res = aux gres s t [s] [] in
+  match res with
     (_,path,_) -> path
 
 
-   
-    
+
+
 
 
 let ford_fulkerson g s t =
