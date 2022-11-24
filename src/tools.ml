@@ -18,3 +18,11 @@ let add_arc gr id1 id2 lbl =
     | Some l -> new_arc gr id1 id2 (l + lbl)
 
 let nb_nodes gr = n_fold gr (fun nb _ -> nb+1) 0
+
+let e_path n_path =
+  let rec aux p acc = match p with
+    | [] -> acc
+    | [_] -> raise (Graph_error "Pb de chemin")
+    | [id1;id2] -> (id1,id2)::acc
+    | id1::id2::q -> aux (id2::q) ((id1,id2)::acc)
+  in List.rev (aux n_path [])

@@ -11,3 +11,6 @@ val add_arc: int graph -> id -> id -> int -> int graph
 
 (* nb_nodes gr returns the number of nodes of the graph gr *)
 val nb_nodes: 'a graph -> int
+
+(* path_e path_n returns the list of edges of a path from the list of nodes *)
+val e_path: 'a list -> ('a * 'a) list
