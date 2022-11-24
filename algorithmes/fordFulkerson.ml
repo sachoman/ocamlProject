@@ -34,14 +34,7 @@ let ford_fulkerson g s t =
   assert false
 
 let make_residual_graph actual_res_gr flow_graph path =
-  let rec find_min_of_path p m = match p with
-    | [] -> m
-    | [_] -> raise Graph_error "Pb"
-    | id1::id2 -> match (find_arc id1 id2) with
-      | Some v -> min v m
-      | None -> raise Graph_error "No edge"
-      | id1::id2::q -> match (find_arc id1 id2) with
-        | Some v -> min v (find_min_of_path id2::q m)
-        | None -> raise Graph_error "No edge"
-  in find_min_of_path path max_int in
-assert false
+  let min_flow = List.fold_left (fun x (_,label) -> min x label) max_int path in
+  let e_p = e_path (List.map (fun (id,_) -> id) path) in
+  let temp_gr = List.fold_left (fun gr (id1,id2) -> add_arc gr id1 id2 min_flow) actual_res_gr e_p in
+  List.fold_left (fun gr (id1,id2) -> add_arc gr id2 id1 (-min_flow)) temp_gr e_p
