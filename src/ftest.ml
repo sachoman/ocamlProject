@@ -35,12 +35,14 @@ let () =
 
   (* Test add_arc *)
   (* let output_graph = gmap (add_arc (gmap graph int_of_string) 2 5 98) string_of_int in *)
-  let path = find_path graph 1 2 in
-  let output_graph = update_residual_graph graph path in
+  let graph2 = gmap graph int_of_string in
+  let path = find_path graph2 1 2 in
+  let output_graph = update_residual_graph graph2 path in
 
   (* Rewrite the graph that has been read. *)
   (* let () = write_file outfile output_graph in *)
-  let () = export outfile output_graph in
+  let output_graph2 = gmap output_graph string_of_int in
+  let () = export outfile output_graph2 in
 
   ()
 
