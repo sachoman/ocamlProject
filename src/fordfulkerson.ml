@@ -6,24 +6,22 @@ open Stack
 let edmond_karp gr = assert false
 
 let find_path gres s t = 
-  let rec aux gres a c deja_vu path= 
+  let rec aux a c deja_vu path= 
     if (a==c) then ([],path, true)
     else
       let larc = out_arcs gres a in
-      match larc with 
-      |[] -> ([], [], false)
-      |l-> try (
-        let e = List.find (not(list.mem e deja_vu)) l in
-        let res = aux gres b c (b::deja_vu) ((b,label)::path) in
-        (
-          match res with
-            (res_deja_vu, _ , false) -> aux gres a c (res_deja_vu@deja_vu) path
-          |(_,path, true ) -> ([],path, true)
-        )
-      )
-    with
-    Not_found -> ([],[],false)
-  in let res = aux gres s t [s] [] in
+      try (
+              let (x,y) = List.find (fun e -> not(List.mem (fst(e)) deja_vu)) larc in
+              let res = aux x c (x::deja_vu) ((x,y)::path) in
+              (
+                match res with
+                |(res_deja_vu, _ , false) -> aux a c (res_deja_vu@deja_vu) path
+                |(_,path, true ) -> ([],path, true)
+              )
+            )
+          with
+          Not_found -> (deja_vu,[],false)
+  in let res = aux s t [s] [] in
   match res with
     (_,path,_) -> path
 
