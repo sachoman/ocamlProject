@@ -11,15 +11,18 @@ let find_path gres s t =
     else
       let larc = out_arcs gres a in
       match larc with 
-        [] -> ([], [], false)
-      |(b,label)::q when (not (List.mem a deja_vu)) -> 
+      |[] -> ([], [], false)
+      |l-> try (
+        let e = List.find (not(list.mem e deja_vu)) l in
         let res = aux gres b c (b::deja_vu) ((b,label)::path) in
         (
           match res with
             (res_deja_vu, _ , false) -> aux gres a c (res_deja_vu@deja_vu) path
           |(_,path, true ) -> ([],path, true)
         )
-      |(b,_)::q -> aux gres a c (b::deja_vu) path
+      )
+    with
+    Not_found -> ([],[],false)
   in let res = aux gres s t [s] [] in
   match res with
     (_,path,_) -> path
