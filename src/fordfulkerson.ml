@@ -12,7 +12,7 @@ let find_path gres s t =
       let larc = out_arcs gres a in
       match larc with 
         [] -> ([], [], false)
-      |(b,label)::q when (not (List.mem a deja_vu)) -> 
+      |(b,label)::q when (not (List.mem b deja_vu)) -> 
         let res = aux gres b c (b::deja_vu) ((b,label)::path) in
         (
           match res with
@@ -25,8 +25,8 @@ let find_path gres s t =
     (_,path,_) -> path
 
 
-   
-    
+
+
 
 
 let ford_fulkerson g s =
