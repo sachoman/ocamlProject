@@ -29,7 +29,7 @@ let find_path gres s t =
     
 
 
-let ford_fulkerson g s t =
+let ford_fulkerson g s =
   (*
   let n = nbr_nodes g in
   let c = Array.make_matrix n n 0 in
