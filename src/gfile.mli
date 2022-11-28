@@ -19,4 +19,4 @@ val write_file: path -> string graph -> unit
 *)
 
 (* Create the dot file of the graph *)
-val export: path -> string graph -> unit
+val export: path -> string graph -> int list -> unit

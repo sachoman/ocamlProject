@@ -99,7 +99,7 @@ let from_file path =
   close_in infile ;
   final_graph
 
-let export path graph =
+let export path graph list_double_circle =
 
   (* Open a write-file. *)
   let ff = open_out path in
@@ -110,7 +110,9 @@ let export path graph =
       node [fontname=\"Helvetica,Arial,sans-serif\"]
       edge [fontname=\"Helvetica,Arial,sans-serif\"]
       rankdir=LR;
-      node [shape = circle];\n" ;
+      node [shape = doublecircle]; ";
+  let () = List.iter (fun n -> fprintf ff "%d " n) list_double_circle in
+  fprintf ff "\nnode [shape = circle];\n" ;
 
   (* Write all arcs *)
   e_iter graph (fun id1 id2 lbl -> fprintf ff "%d -> %d [label = \"%s\"]\n" id1 id2 lbl) ;
