@@ -27,8 +27,17 @@ let find_path gres s t =
 
 
 
+let make_flow_graph init_graph last_residual_graph =
+  let flow_graph = clone_nodes init_graph in
+  e_fold init_graph (
+    fun g id1 id2 label -> let label = find_arc last_residual_graph id2 id1 in
+      (
+        match label with
+        | Some x -> new_arc g id1 id2 x
+        | None -> new_arc g id1 id2 0
+      )
 
-
+  ) flow_graph
 
 let ford_fulkerson g s =
   (*
@@ -40,5 +49,8 @@ let ford_fulkerson g s =
 let update_residual_graph actual_res_gr path id_start=
   let min_flow = List.fold_left (fun x (_,label) -> min x label) max_int path in
   let e_p = e_path (List.map (fun (id,_) -> id) ((id_start,0)::(List.rev path))) in
+  (* removes flow in forward edges *)
   let temp_gr = List.fold_left (fun gr (id1,id2) -> add_arc gr id2 id1 min_flow) actual_res_gr e_p in
+  (* removes flow in backward edges *)
   List.fold_left (fun gr (id1,id2) -> add_arc gr id1 id2 (-min_flow)) temp_gr e_p
+
