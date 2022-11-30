@@ -37,8 +37,8 @@ let ford_fulkerson g s =
   *)
   assert false
 
-let update_residual_graph actual_res_gr path =
+let update_residual_graph actual_res_gr path id_start=
   let min_flow = List.fold_left (fun x (_,label) -> min x label) max_int path in
-  let e_p = e_path (List.map (fun (id,_) -> id) path) in
+  let e_p = e_path (List.map (fun (id,_) -> id) ((id_start,0)::(List.rev path))) in
   let temp_gr = List.fold_left (fun gr (id1,id2) -> add_arc gr id2 id1 min_flow) actual_res_gr e_p in
   List.fold_left (fun gr (id1,id2) -> add_arc gr id1 id2 (-min_flow)) temp_gr e_p
