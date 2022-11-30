@@ -35,19 +35,23 @@ let () =
 
   (* Test add_arc *)
   (* let output_graph = gmap (add_arc (gmap graph int_of_string) 2 5 98) string_of_int in *)
+  
+  (*
   let graph2 = gmap graph int_of_string in
   let path = find_path graph2 0 5 in
   let l_double = List.map (fun (a,_)->a) path in
   let output_graph_with_path = gmap graph2 string_of_int in
   let () = export outfile output_graph_with_path l_double in
   let residual_graph = update_residual_graph graph2 path 0 in
-  (*let output_graph = update_residual_graph graph2 path in*)
 
-  (* Rewrite the graph that has been read. *)
-  (* let () = write_file outfile output_graph in *)
   let outfile_res = String.concat "_" [outfile;"residual"] in
   let output_residual_graph = gmap residual_graph string_of_int in
   let () = export outfile_res output_residual_graph [] in
+  *)
+  let graph_int = gmap graph int_of_string in
+  let flow_graph_int = ford_fulkerson graph_int 0 5 in
+  let flow_graph_string = gmap flow_graph_int string_of_int in
+  let () = export outfile flow_graph_string [0;5] in
 
   ()
 

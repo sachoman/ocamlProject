@@ -11,7 +11,7 @@ let find_path gres s t =
     else
       let larc = out_arcs gres a in
       try (
-        let (x,y) = List.find (fun e -> not(List.mem (fst(e)) deja_vu)) larc in
+        let (x,y) = List.find (fun e -> (not(List.mem (fst(e)) deja_vu) && not(snd(e)=0))) larc in
         let res = aux x c (x::deja_vu) ((x,y)::path) in
         (
           match res with
@@ -23,7 +23,8 @@ let find_path gres s t =
         Not_found -> (deja_vu,[],false)
   in let res = aux s t [s] [] in
   match res with
-    (_,path,_) -> path
+    (_,_,false) -> []
+    |(_,path,true) -> path
 
 
 
@@ -39,6 +40,14 @@ let make_flow_graph init_graph last_residual_graph =
 
   ) flow_graph
 
+let update_residual_graph actual_res_gr path id_start=
+  let min_flow = List.fold_left (fun x (_,label) -> min x label) max_int path in
+  let e_p = e_path (List.map (fun (id,_) -> id) ((id_start,0)::(List.rev path))) in
+  (* removes flow in forward edges *)
+  let temp_gr = List.fold_left (fun gr (id1,id2) -> add_arc gr id2 id1 min_flow) actual_res_gr e_p in
+  (* removes flow in backward edges *)
+  List.fold_left (fun gr (id1,id2) -> add_arc gr id1 id2 (-min_flow)) temp_gr e_p
+
 let ford_fulkerson g s t=
   (*
   let n = nbr_nodes g in
@@ -48,18 +57,14 @@ let ford_fulkerson g s t=
     let path = find_path gres s t in
     if path =[] then gres
     else(
-      let gres_new = update_residual_graph path s in
-      aux gres_new
+      let min_flow = List.fold_left (fun x (_,label) -> min x label) max_int path in
+      if (min_flow  = 0) then gres
+      else(
+        let gres_new = update_residual_graph gres path s in
+        aux gres_new
+      )
     )
   in 
-  let gres_final = aux g s t in
-  assert false
-
-let update_residual_graph actual_res_gr path id_start=
-  let min_flow = List.fold_left (fun x (_,label) -> min x label) max_int path in
-  let e_p = e_path (List.map (fun (id,_) -> id) ((id_start,0)::(List.rev path))) in
-  (* removes flow in forward edges *)
-  let temp_gr = List.fold_left (fun gr (id1,id2) -> add_arc gr id2 id1 min_flow) actual_res_gr e_p in
-  (* removes flow in backward edges *)
-  List.fold_left (fun gr (id1,id2) -> add_arc gr id1 id2 (-min_flow)) temp_gr e_p
+  let gres_final = aux g in
+  make_flow_graph g gres_final
 

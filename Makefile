@@ -26,7 +26,5 @@ view:
 	./ftest.native graphs/graph1 1 2 outfile
 	@echo "\n==== CONVERTING ====\n"
 	dot -Tpng outfile > outfile.png
-	dot -Tpng outfile_residual > outfile_residual.png
 	@echo "\n==== PRINTING ====\n"
 	eom outfile.png
-	eom outfile_residual.png
