@@ -23,7 +23,7 @@ clean:
 
 view:
 	@echo "\n==== EXPORTING ====\n"
-	./ftest.native graphs/graph1 1 2 outfile
+	./ftest.native graphs/graph2 1 2 outfile
 	@echo "\n==== CONVERTING ====\n"
 	dot -Tpng outfile > outfile.png
 	@echo "\n==== PRINTING ====\n"

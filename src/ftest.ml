@@ -35,7 +35,7 @@ let () =
 
   (* Test add_arc *)
   (* let output_graph = gmap (add_arc (gmap graph int_of_string) 2 5 98) string_of_int in *)
-  
+
   (*
   let graph2 = gmap graph int_of_string in
   let path = find_path graph2 0 5 in
@@ -49,9 +49,10 @@ let () =
   let () = export outfile_res output_residual_graph [] in
   *)
   let graph_int = gmap graph int_of_string in
-  let flow_graph_int = ford_fulkerson graph_int 0 5 in
+  let flow_graph_int = ford_fulkerson graph_int 0 10 in
+  (*let flow_graph_int = graph_int in*)
   let flow_graph_string = gmap flow_graph_int string_of_int in
-  let () = export outfile flow_graph_string [0;5] in
+  let () = export outfile flow_graph_string [0;10] in
 
   ()
 
