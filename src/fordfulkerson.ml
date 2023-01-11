@@ -3,9 +3,6 @@ open Tools
 open Array
 open Stack
 
-let edmond_karp gr = assert false
-
-
 (* s = start, d = destination *)
 let find_path gres s d = 
   (* a : noeud intermédiare du chemin, 
