@@ -1,4 +1,4 @@
-Open Graph
-Open List
-
-val generateGraph : patn -> unit
+open Graph
+open List
+open Gfile
+val generateGraph : path -> unit
