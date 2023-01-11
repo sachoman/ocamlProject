@@ -14,5 +14,9 @@ let from_file path1 path2 =
   let rec loop =
     try
       let line = String.split_on_char ',' (input_line infile1) in
-
+      names = (List.hd line)::names;
+      places_by_host = (List.hd (List.tl line))::places_by_host;
+      ()
     with End_of_file -> ()
+  in
+  let () = loop in
