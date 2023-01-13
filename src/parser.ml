@@ -29,6 +29,9 @@ let get_nths_id list_of_lists n start =
       | None -> aux q (i+1) acc
   in List.rev (aux list_of_lists start [])
 
+
+(* Récupère la liste des tupes (i,j) quand le j ème élément de la i ème liste vaut 1, avec un offset n *)
+(* string list list -> int -> (int * int) list *)
 let recup_couples list_of_lists n =
   let result = ref [] in
   let i = ref 0 in
