@@ -1,4 +1,4 @@
 open Graph
 open List
 open Gfile
-val generateGraph : path -> unit
+val generateGraph: string -> string -> string -> unit
