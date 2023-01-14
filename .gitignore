@@ -1,5 +1,6 @@
 _build/
 ftest.native
+hostHackers.native
 outfile
 outfile.png
 *~

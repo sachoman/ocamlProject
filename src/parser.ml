@@ -81,8 +81,8 @@ let import path1 path2 =
   let names = (get_nths_id (get_tl_or_empty capacites_hosts) 0 0)
               @ (get_nths_id (get_tl_or_empty preferences) 0 n) in
   let l = (get_nths_id (get_tl_or_empty capacites_hosts) 1 0) in
-  let _ = Printf.printf("liste  créée \n %!") in
+  let _ = Printf.printf("liste créée\n%!") in
   let _ = List.iter (fun (x, y) -> Printf.printf "(%d, %s)\n%!" x y) l  in
-  let beds_availables = List.map (fun (a,b) -> let _ = Printf.printf "\n%!" in (a, (int_of_string b))) l in
+  let beds_availables = List.map (fun (a,b) -> let _ = Printf.printf "%s\n%!" b in (a, (int_of_string b))) l in
   let _ = Printf.printf("beds available ok \n %!") in
   (n, m, names, beds_availables, (recup_couples (suppr_fst_col_and_row preferences) n))
