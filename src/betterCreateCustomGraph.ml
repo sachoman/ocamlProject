@@ -38,7 +38,6 @@ let better_resolveProbleme () =
   let graph = from_file "GraphInit" in
   let graph_int = gmap graph int_of_string in
   let n, m, tnodes,tcapa,larcs = better_import pathCapa pathAppariements in 
-  Printf.printf "nombre de neouds %d\n%!" (n+m);
   let flow_graph_int = better_ford_fulkerson graph_int (n+m) (n+m+1) pathCapa pathAppariements in
   let _ = List.iter (fun (x,xs) -> if x >= n then let larcs = out_arcs flow_graph_int x in
                         let rec aux l bol = 
