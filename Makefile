@@ -12,7 +12,7 @@ edit:
 
 demo: build
 	@echo "\n==== EXECUTING ====\n"
-	./ftest.native graphs/graph1 1 2 outfile
+	./ftest.native graphs/graph2 1 2 outfile
 	@echo "\n==== RESULT ==== (content of outfile) \n"
 	@cat outfile
 
@@ -21,7 +21,10 @@ probleme: build
 	@echo "\n==== PROBLEM ====\n"
 	./hostHackers.native
 	@echo "\n==== RESULT ==== (content of outfile) \n"
-	@cat "resultGraph"
+	@echo "\n==== CONVERTING ====\n"
+	dot -Tpng flowGraph > flowGraph.png
+	@echo "\n==== PRINTING ====\n"
+	eom flowGraph.png
 
 d: build
 	@echo "\n==== EXECUTING ====\n"

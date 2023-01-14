@@ -5,7 +5,5 @@ open CreateCustomGraph
 open Parser
 
 let () =
-  let pathCapa = "datas/SheetsOCAMLcapacites.csv" in
-  let pathAppariements = "datas/SheetsOCAMLappariement.csv" in
-  let _ = generateGraph pathCapa pathAppariements"resultGraph" in
+  let _ = resolveProbleme () in
   ()

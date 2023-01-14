@@ -19,6 +19,8 @@ let suppr_fst_col_and_row li =
 
 (* Renvoie la liste des nièmes éléments accompagnés d'un id d'une liste de listes (si les éléments existent) *)
 (* 'a list list -> int -> (int * 'a) list *)
+(*n colonne*)
+(*satrt offset pour la ligne ligne*)
 let get_nths_id list_of_lists n start =
   let rec aux l i acc = match l with
     | [] -> acc
@@ -36,7 +38,7 @@ let recup_couples list_of_lists n =
   List.iter (fun sublist ->
       let j = ref 0 in
       List.iter (fun x ->
-          if x = "1" then begin
+          if ((x = "1")|| (x.[0] = '1'))  then begin
             result := (!i+n, !j) :: !result;
           end;
           incr j
@@ -59,6 +61,12 @@ let read_csv file_name =
     with End_of_file -> close_in file; List.rev acc
   in
   read_lines []
+(* change un strign qui veut pas se transformer en itn via int_of_string*) 
+let int_of_fucking_string s=
+  let c = int_of_char (s.[0]) in
+  c-48
+
+
 
 (* Renvoie les informations nécessaires (cf. .mli) *)
 let import path1 path2 =
@@ -81,8 +89,7 @@ let import path1 path2 =
   let names = (get_nths_id (get_tl_or_empty capacites_hosts) 0 0)
               @ (get_nths_id (get_tl_or_empty preferences) 0 n) in
   let l = (get_nths_id (get_tl_or_empty capacites_hosts) 1 0) in
-  let _ = Printf.printf("liste créée\n%!") in
-  let _ = List.iter (fun (x, y) -> Printf.printf "(%d, %s)\n%!" x y) l  in
-  let beds_availables = List.map (fun (a,b) -> let _ = Printf.printf "%s\n%!" b in (a, (int_of_string b))) l in
-  let _ = Printf.printf("beds available ok \n %!") in
-  (n, m, names, beds_availables, (recup_couples (suppr_fst_col_and_row preferences) n))
+  (*
+  let beds_availables = List.map (fun (a,b) -> (a, (int_of_fucking_string b))) l in
+  let _ = Printf.printf "taiulle liste :%d\n%!"  (List.length beds_availables) in *)
+  (n, m, names, l, (recup_couples (suppr_fst_col_and_row preferences) n))
