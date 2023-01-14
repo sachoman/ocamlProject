@@ -1,8 +1,6 @@
 open Graph
 open Printf
 
-type idp = int
-
 (* =============== DEFINITION DE FONCTIONS UTILES =============== *)
 
 (* Renvoie la queue d'une liste si elle existe, la liste vide défaut *)
@@ -82,5 +80,5 @@ let import path1 path2 =
   in
   let names = (get_nths_id (get_tl_or_empty capacites_hosts) 0 0)
               @ (get_nths_id (get_tl_or_empty preferences) 0 n) in
-  let beds_availables = (get_nths_id (get_tl_or_empty capacites_hosts) 1 0) in
+  let beds_availables = List.map (fun (a,b) -> (a, int_of_string b)) (get_nths_id (get_tl_or_empty capacites_hosts) 1 0) in
   (n, m, names, beds_availables, (recup_couples (suppr_fst_col_and_row preferences) n))
