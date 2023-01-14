@@ -38,8 +38,15 @@ let better_recup_couples list_of_lists n =
   List.iter (fun sublist ->
       let j = ref 0 in
       List.iter (fun x ->
-          result := ((!i+n, !j),int_of_string x) :: !result;
-          incr j
+          if (int_of_char (String.get x (String.length x-1))>=48) && (int_of_char (String.get x (String.length x-1))<=57)
+          then (
+            result := ((!i+n, !j), (100 - int_of_string x)):: !result;
+            incr j
+          )
+          else (
+            result := ((!i+n, !j), (100 - int_of_string (String.sub x 0 (String.length x -1 ) ))):: !result;
+            incr j
+          )
         ) sublist;
       incr i;
     ) list_of_lists;
