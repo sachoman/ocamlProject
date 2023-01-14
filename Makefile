@@ -3,6 +3,7 @@ build:
 	@echo "\n==== COMPILING ====\n"
 	ocamlbuild ftest.native
 
+
 format:
 	ocp-indent --inplace src/*
 
@@ -14,6 +15,13 @@ demo: build
 	./ftest.native graphs/graph1 1 2 outfile
 	@echo "\n==== RESULT ==== (content of outfile) \n"
 	@cat outfile
+
+probleme: build
+	ocamlbuild hostHackers.native
+	@echo "\n==== PROBLEM ====\n"
+	./hostHackers.native
+	@echo "\n==== RESULT ==== (content of outfile) \n"
+	@cat "resultGraph"
 
 d: build
 	@echo "\n==== EXECUTING ====\n"
