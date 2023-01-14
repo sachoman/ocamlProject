@@ -44,9 +44,13 @@ d: build
 
 clean:
 	-rm -rf _build/
-	-rm ftest.native
 	-rm outfile
-	-rm outfile.png
+	-rm outfile_residual
+	-rm GraphInit
+	-rm graphFlowOut
+	-rm flowGraph
+	-rm *.native
+	-rm *.png
 
 view:
 	@echo "\n==== EXPORTING ====\n"
