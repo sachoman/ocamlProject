@@ -1,8 +1,8 @@
+open Array
 open Graph
 open Printf
 open Gfile
 open Tools
-open Array
 open Stack
 open Betterparser
 open Gfile
