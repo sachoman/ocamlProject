@@ -34,26 +34,26 @@ le nombre de hackers à héberger dans le second fichier.
 
 ### Medium project
 
-   ### Données 
+   # Données 
 
 Les données sont des tableaux excel dans le dossier `datas`:
     - Un fichier `SheetsOCAMLcapacites.csv` qui contient les différentes capacités de chaque hôte
     - Un fichier `SheetsOCAMLappariement.csv` qui contient la correspondance entre chez quels hôtes les hackers peuvent dormir (0 : non, 1 : oui).
 Bien respecter la nomenclature des fichiers et leur structure si ils viennet à être modifiés.
 
-   ### Makefile 
+   # Makefile 
 
 On exécute le programme avec `make probleme`.
 Le programme donne l'organisation des logements dans la console.
 Via la commande `make viewprobleme` on peut voir le graphe de flow ainsi obtenu (apres avoir éxécuté `make probleme`).
 
-   ### Les Fichiers 
+   # Les Fichiers 
 
 Le fichier `parser.ml` traite les données de l'excel et les renvoie sous forme de listes. 
 Ces données sont ensuite utilisées par `createCustomGraph.ml` pour générer le graphe correspondant à la situation.
 Enfin le fichier `hostHackers.ml`assemble nos différentes fonction et FordFulkerson pour produire la solution.
 
-   ### Principe du programme
+   # Principe du programme
 
 Afin de modéliser la situation, chaque hacker et chaque host est modélisé par un noeud.
 On ajout 2 noeuds, un "source" (id -1) et un "puit" (id -2).
