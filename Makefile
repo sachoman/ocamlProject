@@ -20,17 +20,13 @@ probleme: build
 	ocamlbuild hostHackers.native
 	@echo "\n==== PROBLEM ====\n"
 	./hostHackers.native
-	@echo "\n==== RESULT ==== (content of outfile) \n"
-	@echo "\n==== CONVERTING ====\n"
-	dot -Tpng flowGraph > flowGraph.png
-	@echo "\n==== PRINTING ====\n"
-	eom flowGraph.png
 
 betterprobleme: build
 	ocamlbuild betterHostHackers.native
 	@echo "\n==== PROBLEM ====\n"
 	./betterHostHackers.native
-	@echo "\n==== RESULT ==== (content of outfile) \n"
+	
+viewprobleme:
 	@echo "\n==== CONVERTING ====\n"
 	dot -Tpng flowGraph > flowGraph.png
 	@echo "\n==== PRINTING ====\n"

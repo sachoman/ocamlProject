@@ -47,7 +47,7 @@ let extraire_min (q:'a priorityQueue) : 'a * 'a priorityQueue =
 
 let rec diminuer_clef (x:'a) (clef:int) (q:'a priorityQueue) : 'a priorityQueue =
   match q with
-  | [ ] -> failwith "diminuer_clef : l'element n'est pas présent"
+  | [ ] -> Printf.printf "on rajoute dans la file car diminution\n%!";[(clef, x)]
   | (_, v) :: q when v=x -> (clef, x) :: q
   | (c, v) :: q -> (c, v) :: diminuer_clef x clef q
 ;;

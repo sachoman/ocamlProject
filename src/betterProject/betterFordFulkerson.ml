@@ -18,22 +18,26 @@ let better_find_path g s d l=
   while not(est_vide !q) do
     let (x, q') = extraire_min !q in
     q := q';
-    (* on regarde les adjacents de x *)
+    (* on met à jour la distance pour tous les arcs sortants *)
     let bb = ref true in
     List.iter (fun (y,label) ->
         if !bb then(
+          (*On vérifie que l'arrête peut bien être parcourue dans un sens ou l'autre*)
           if label <> 0 then
+            (*cas ou le sommet de départ de l'arrête est notre sommet initial*)
             if x=s then (dist.(y) <- dist.(x);
                          (*Printf.printf "on améliore %d\n%!" dist.(y);*)
                          prev.(y) <- x;
                          q := diminuer_clef y dist.(y) !q)
             else
+              (*cas ou le sommet d'arrivée de l'arrête est notre sommet final*)
             if dist.(x)<> max_int then(
               if y=d then (dist.(y) <- dist.(x);
                            (*"on améliore %d et on vide !!!!!!\n%!" dist.(y);*)
                            prev.(y) <- x;
                            q := vide;
                            bb := false) else
+                (*cas général, on regarde le cout de l'arrête dans la liste issue du parsing de notre tableau d'appariements*)
                 match List.assoc_opt (x,y) l with
                 |Some c ->  
                   if dist.(y) > dist.(x) + c
@@ -43,25 +47,28 @@ let better_find_path g s d l=
                     (*"on améliore %d\n%!" dist.(y);*)
                     q := diminuer_clef y (dist.(y)) !q
                   )
-                |None ->(match List.assoc_opt (y,x) l with
-                    |None -> () (*"pas d'arrete positive\n%!" *)
-                    |Some c ->  if dist.(y) > dist.(x) - c
-                      then (
-                        dist.(y) <- dist.(x) - c;
-                        prev.(y) <- x;
-                        (*"on améliore %d\n%!" dist.(y); *)
-                        q := diminuer_clef y (dist.(y)) !q
-                      )
+                |None ->
+                  (*La liste fournit seulement les arrêtes positives, dans ce cas on regarde le cout en inversant le sens de l'arrête et on inverse son signe*)
+                  (match List.assoc_opt (y,x) l with
+                   |None -> ()
+                   |Some c ->  if dist.(y) > dist.(x) - c
+                     then (
+                       dist.(y) <- dist.(x) - c;
+                       prev.(y) <- x;
+                       (*"on améliore %d\n%!" dist.(y); *)
+                       q := diminuer_clef y (dist.(y)) !q
+                     )
                   )
             )
         )
       ) (out_arcs g x)
   done;
+  (*on reconstruit le chemin à partir du tableau prev*)
   let rec aux path x = 
     match prev.(x) with
     |(-1) -> (x::path)
     |y -> aux (x::path) y  
-  in aux [] d  
+  in aux [] d   
 
 let better_update_residual_graph actual_res_gr e_p id_start min_flow=
   (* removes flow in forward edges *)
@@ -81,6 +88,8 @@ let better_ford_fulkerson g s d path1 path2=
     |_ -> 
       (
         let e_new_path = e_path path in
+        (*Permet d'afficher les chemins pris successivement par notre algorithme *)
+        (*List.iter (fun x -> if x = d then Printf.printf "%d\n%!" x else Printf.printf "%d->%!" x) path;*)
         let min_flow = ref max_int in
         let _ = List.iter (fun (x,y) -> match find_arc g x y with | None -> ()|Some e -> if e< !min_flow then min_flow := e ) e_new_path in
         if (!min_flow  = 0) then gres

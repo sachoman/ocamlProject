@@ -1,9 +1,6 @@
 open Gfile
 open Tools
 open Fordfulkerson
-open CreateCustomGraph
-open Parser
-open BetterFordFulkerson
 
 let () =
 
