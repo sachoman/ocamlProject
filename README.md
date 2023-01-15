@@ -23,7 +23,7 @@ In case of trouble with the VSCode extension (e.g. the project does not build, t
 ================ PROJET ================
 ========================================
 
-### Contexte :
+# Contexte :
 Le problème consiste en l'attribution de lits pour des "hackers" chez des "hosts".
 Les hosts renseignent le nombre de lits disponibles dans un premier fichier .csv
 (cf. fichier SheetsOCAMLappariement.csv)
@@ -32,28 +32,28 @@ Des exemples de fichiers sont présents dans le dossier "datas".
 /!\ Le premier string de la première ligne (cellule A1 dans un tableur) dénombre les hosts dans le premier fichier,
 le nombre de hackers à héberger dans le second fichier.
 
-### Medium project
+# Medium project
 
-   # Données 
+   ### Données 
 
 Les données sont des tableaux excel dans le dossier `datas`:
     - Un fichier `SheetsOCAMLcapacites.csv` qui contient les différentes capacités de chaque hôte
     - Un fichier `SheetsOCAMLappariement.csv` qui contient la correspondance entre chez quels hôtes les hackers peuvent dormir (0 : non, 1 : oui).
 Bien respecter la nomenclature des fichiers et leur structure si ils viennet à être modifiés.
 
-   # Makefile 
+   ### Makefile 
 
 On exécute le programme avec `make probleme`.
 Le programme donne l'organisation des logements dans la console.
 Via la commande `make viewprobleme` on peut voir le graphe de flow ainsi obtenu (apres avoir éxécuté `make probleme`).
 
-   # Les Fichiers 
+   ### Les Fichiers 
 
 Le fichier `parser.ml` traite les données de l'excel et les renvoie sous forme de listes. 
 Ces données sont ensuite utilisées par `createCustomGraph.ml` pour générer le graphe correspondant à la situation.
 Enfin le fichier `hostHackers.ml`assemble nos différentes fonction et FordFulkerson pour produire la solution.
 
-   # Principe du programme
+   ### Principe du programme
 
 Afin de modéliser la situation, chaque hacker et chaque host est modélisé par un noeud.
 On ajout 2 noeuds, un "source" (id -1) et un "puit" (id -2).
@@ -68,7 +68,7 @@ Il suffit enfin d'exécuter l'algorithme de FordFulkerson entre la source et le 
 La solution s'interprète de la façon suivante : si le flux entre un hacker et un host est à 1 alors le second héberge le premier.
 Le programme indentifie les hackers sans logement si le cas se présente.
 
-### Better project
+# Better project
 
    ### Données 
 
