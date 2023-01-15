@@ -76,21 +76,9 @@ let int_of_fucking_string s=
 (* Renvoie les informations nécessaires (cf. .mli) *)
 let better_import path1 path2 =
   let capacites_hosts = read_csv path1 in
-  let n =
-    match capacites_hosts with
-    | [] -> failwith "Fichier vide"
-    | l::_ -> match l with
-      | [] -> failwith "Pb fichier"
-      | x::_ -> int_of_string x
-  in
+  let n = List.length capacites_hosts - 1 in
   let preferences = read_csv path2 in
-  let m =
-    match preferences with
-    | [] -> failwith "Fichier vide"
-    | l::_ -> match l with
-      | [] -> failwith "Pb fichier"
-      | x::_ -> int_of_string x
-  in
+  let m = List.length preferences - 1 in
   let names = (get_nths_id (get_tl_or_empty capacites_hosts) 0 0)
               @ (get_nths_id (get_tl_or_empty preferences) 0 n) in
   let l = (get_nths_id (get_tl_or_empty capacites_hosts) 1 0) in

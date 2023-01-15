@@ -24,5 +24,5 @@ let () =
                         in aux larcs true
                     ) tnodes in
   let flow_graph_string = gmap flow_graph_int string_of_int in
-  let () = export "flowGraph" flow_graph_string [0;10] in
+  let () = export "flowGraph" flow_graph_string [n+m;n+m+1] in
   ()
