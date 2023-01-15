@@ -7,6 +7,7 @@ open Fordfulkerson
 open CreateCustomGraph
 
 let () =
+  let ff = open_out "outfile.txt" in
   let pathCapa = "datas/SheetsOCAMLcapacites.csv" in
   let pathAppariements = "datas/SheetsOCAMLappariement.csv" in
   let _ = generateGraph pathCapa pathAppariements "GraphInit" in
@@ -17,10 +18,13 @@ let () =
   let _ = List.iter (fun (x,xs) -> if x >= n then let larcs = out_arcs flow_graph_int x in
                         let rec aux l bol = 
                           match l with 
-                          |[] -> if bol then Printf.printf "%s n'a pas de logement\n%!" xs
-                          |(y,l)::q -> if l != 0 then (Printf.printf "%s loge chez %s\n%!" xs (match List.assoc_opt y tnodes with Some a -> a | None -> "none") ; aux q false) else aux q bol 
+                          |[] -> if bol then (Printf.printf "%s n'a pas de logement\n%!" xs;
+                                              fprintf ff "%s n'a pas de logement\n%!" xs);
+                          |(y,l)::q -> if l != 0 then let host = (match List.assoc_opt y tnodes with Some a -> a | None -> "none") in
+                              ((Printf.printf "%s loge chez %s\n%!" xs host; fprintf ff "%s loge chez %s\n%!" xs host) ; aux q false) else aux q bol 
                         in aux larcs true
                     ) tnodes in
   let flow_graph_string = gmap flow_graph_int string_of_int in
-  let () = export "flowGraph" flow_graph_string [0;10] in
+  let () = export "flowGraph" flow_graph_string [-1;-2] in
+  close_out ff;
   ()

@@ -47,6 +47,7 @@ clean:
 	-rm flowGraph
 	-rm *.native
 	-rm *.png
+	-rm outfile.txt
 
 view:
 	@echo "\n==== EXPORTING ====\n"

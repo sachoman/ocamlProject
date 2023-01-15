@@ -45,6 +45,7 @@ Bien respecter la nomenclature des fichiers et leur structure si ils viennet à 
 
 On exécute le programme avec `make probleme`.
 Le programme donne l'organisation des logements dans la console.
+L'organisation des logements est exportée dans un fichier `outfile.txt`.
 Via la commande `make viewprobleme` on peut voir le graphe de flow ainsi obtenu (apres avoir éxécuté `make probleme`).
 
    ### Les Fichiers 
@@ -80,6 +81,7 @@ Bien respecter la nomenclature des fichiers et leur structure si ils viennet à 
    ### Makefile 
 
 On exécute le programme avec la commande `make betterprobleme`.
+L'organisation des logements est exportée dans `outfile.txt`.
 Via la commande `make viewprobleme` on peut voir le graphe de flow ainsi obtenu (apres avoir éxécuté `make betterprobleme`).
 
    ### Fichiers
