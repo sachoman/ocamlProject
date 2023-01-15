@@ -35,7 +35,7 @@ le nombre de hackers à héberger dans le second fichier.
 ### Medium project
 Ici, les affinités sont des booléens 0 ou 1 ; un hacker peut dormir ou non chez un host.
 
-On exécute le programme avec "make probleme".
+On exécute le programme avec `make probleme`.
 Le programme donne l'organisation des logements dans la console ainsi que le graphe obtenu
 (celui-ci sert à débuger et nous l'avons laissé pour la démonstration).
 
@@ -57,7 +57,7 @@ Ici, on prend en compte les affinités de façon graduée (pourcentage).
 Le fichier de capacité des hosts ne change pas. Pour celui des affinités on remplace les 0 et 1 par une valeur entre 0 et 100
 (cf. fichier SheetsOCAMLbetterappariement.csv)
 
-On exécute le programme avec la commande "make betterprobleme".
+On exécute le programme avec la commande `make betterprobleme`.
 Le programme cherche ici à maximiser le total des affinités.
 On utilise une combinaison des algorithmes de Dijkstra et FordFulkerson ;
 les chemins améliorants de FordFulkerson sont donnés par Diskstra.
